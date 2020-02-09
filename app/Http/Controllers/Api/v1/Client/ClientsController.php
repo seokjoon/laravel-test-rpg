@@ -16,7 +16,7 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        $outs = Client::orderByUpdatedDesc()->paginate(20);
+        $outs = Client::orderBy('updated_at', 'desc')->paginate(20);
 
         return new ClientCollection($outs);
     }
