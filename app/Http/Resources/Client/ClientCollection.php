@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Client;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Support\Facades\Log;
 
 class ClientCollection extends ResourceCollection
 {
@@ -14,6 +15,15 @@ class ClientCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        $this->collection->transform(function($item) {
+            $outs = $item->toArray();
+            $outs['players'] = array_map(function($item) {
+                return [$item['id'], $item['name']];
+            }, $outs['players']);
+            return $outs;
+        });
+
+        return ['data' => $this->collection];
+        //return parent::toArray($request);
     }
 }

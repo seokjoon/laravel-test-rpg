@@ -11,6 +11,6 @@ class ClientPlayerTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Client\ClientPlayer::class, 50)->create();
+        factory(\App\Models\Client\ClientPlayer::class, 30)->create();
     }
 }
