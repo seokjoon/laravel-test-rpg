@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['namespace' => 'Api'], function() {
+    Route::group(['prefix' => 'v1', 'namespace' => 'v1'], function() {
+        Route::resource('clients', 'Client\ClientsController');
+        Route::resource('quests', 'Quest\QuestsController');
+        Route::resource('players', 'Player\PlayersController');
+    });
+});

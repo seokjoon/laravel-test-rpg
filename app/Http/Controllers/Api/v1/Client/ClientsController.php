@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Client\ClientCollection;
 use App\Models\Client\Client;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,9 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        //
+        $outs = Client::orderByUpdatedDesc()->paginate(20);
+
+        return new ClientCollection($outs);
     }
 
     /**
